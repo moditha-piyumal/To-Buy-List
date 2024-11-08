@@ -19,6 +19,15 @@ const cors = require("cors"); // Import CORS middleware
 
 // MongoDB connection string - replace <password> with the actual password
 const dbURI = process.env.MONGODB_URI;
+const path = require("path");
+
+// Serve static files from the root To-Buy-List directory
+app.use(express.static(path.join(__dirname, "../")));
+
+// For any route, serve index.html as the fallback
+app.get("*", (req, res) => {
+	res.sendFile(path.join(__dirname, "../index.html"));
+});
 
 // Connect to MongoDB using Mongoose
 mongoose
