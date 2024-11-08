@@ -9,7 +9,7 @@ document
 
 		try {
 			// Send login credentials to the backend
-			const response = await fetch("http://localhost:3000/login", {
+			const response = await fetch("https://to-buy-list.onrender.com/login", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ email, password }),
@@ -75,7 +75,7 @@ const handleRegistration = async (event) => {
 
 	try {
 		// Send a POST request to the /register endpoint
-		const response = await fetch("http://localhost:3000/register", {
+		const response = await fetch("https://to-buy-list.onrender.com/register", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -124,7 +124,7 @@ window.onload = function () {
 const addToBuyItem = async (itemName, category) => {
 	console.log("Adding item:", itemName, category); // Log to check if function is triggered
 	try {
-		const response = await fetch("http://localhost:3000/tobuylist", {
+		const response = await fetch("https://to-buy-list.onrender.com/tobuylist", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -171,7 +171,7 @@ let toBuyList = []; // Initialize as an empty array to store fetched items
 // NEW CODE: Fetch the to-buy list from the backend server
 const fetchToBuyList = async () => {
 	try {
-		const response = await fetch("http://localhost:3000/tobuylist", {
+		const response = await fetch("https://to-buy-list.onrender.com/tobuylist", {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
@@ -294,7 +294,7 @@ async function moveToExpenses(itemId) {
 
 	try {
 		// 1. Add the item to the Expense List (POST request to backend)
-		const response = await fetch("http://localhost:3000/expenses", {
+		const response = await fetch("https://to-buy-list.onrender.com/expenses", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -315,7 +315,7 @@ async function moveToExpenses(itemId) {
 
 		// 2. Remove the item from the To-Buy List (DELETE request to backend)
 		const deleteResponse = await fetch(
-			`http://localhost:3000/tobuylist/${itemId}`,
+			`https://to-buy-list.onrender.com/tobuylist/${itemId}`,
 			{
 				method: "DELETE",
 				headers: {
@@ -384,7 +384,7 @@ const fetchExpensesForMonth = async (monthYear) => {
 
 	try {
 		const response = await fetch(
-			`http://localhost:3000/expenses/${monthYear}`,
+			`https://to-buy-list.onrender.com/expenses/${monthYear}`,
 			{
 				method: "GET",
 				headers: {
@@ -472,13 +472,16 @@ async function displayExpensesForMonth(monthYear) {
 const populateMonthDropdown = async () => {
 	console.log("Month Drop Down Function is called");
 	try {
-		const response = await fetch("http://localhost:3000/expenses/months", {
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${localStorage.getItem("token")}`,
-			},
-		});
+		const response = await fetch(
+			"https://to-buy-list.onrender.com/expenses/months",
+			{
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${localStorage.getItem("token")}`,
+				},
+			}
+		);
 
 		if (!response.ok) throw new Error("Failed to fetch months");
 
@@ -610,7 +613,7 @@ document
 async function displayCategoryTotalsForMonth(monthYear) {
 	try {
 		const response = await fetch(
-			`http://localhost:3000/expenses/category-totals/${monthYear}`,
+			`https://to-buy-list.onrender.com/expenses/category-totals/${monthYear}`,
 			{
 				method: "GET",
 				headers: {
