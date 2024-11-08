@@ -24,13 +24,7 @@ const path = require("path");
 // Initialize Express app
 const app = express();
 
-// Serve static files from the root To-Buy-List directory
-app.use(express.static(path.join(__dirname, "../")));
-
 // For any route, serve index.html as the fallback
-app.get("*", (req, res) => {
-	res.sendFile(path.join(__dirname, "../index.html"));
-});
 
 // Connect to MongoDB using Mongoose
 mongoose
@@ -315,6 +309,12 @@ app.get(
 		}
 	}
 );
+// Serve static files from the root To-Buy-List directory
+app.use(express.static(path.join(__dirname, "../")));
+
+app.get("*", (req, res) => {
+	res.sendFile(path.join(__dirname, "../index.html"));
+});
 
 //ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 // Route: Basic Test Endpoint to check server status
