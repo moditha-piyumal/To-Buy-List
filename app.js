@@ -74,6 +74,8 @@ const handleRegistration = async (event) => {
 	const email = document.getElementById("registerEmail").value;
 	const password = document.getElementById("registerPassword").value;
 
+	console.log("Attempting registration with:", { username, email, password }); // Log the form data
+
 	try {
 		// Send a POST request to the /register endpoint
 		const response = await fetch("https://to-buy-list.onrender.com/register", {
@@ -84,13 +86,24 @@ const handleRegistration = async (event) => {
 			body: JSON.stringify({ username, email, password }),
 		});
 
-		const data = await response.json();
+		console.log("Response status:", response.status); // Log the response status
+
+		// Attempt to parse the response as JSON
+		let data;
+		try {
+			data = await response.json();
+		} catch (jsonError) {
+			console.error("Failed to parse JSON:", jsonError); // Log JSON parsing error
+			throw new Error("Unexpected response format");
+		}
 
 		if (response.ok) {
+			console.log("Registration successful:", data); // Log success data
 			alert(data.message); // Registration success message
 			showLogin(); // Switch to login section
 		} else {
-			alert(data.message); // Display error message
+			console.error("Registration failed with message:", data.message); // Log error message
+			alert(data.message || "Registration failed. Please check your input."); // Display error message
 		}
 	} catch (error) {
 		console.error("Error during registration:", error);
