@@ -21,6 +21,9 @@ const cors = require("cors"); // Import CORS middleware
 const dbURI = process.env.MONGODB_URI;
 const path = require("path");
 
+// Initialize Express app
+const app = express();
+
 // Serve static files from the root To-Buy-List directory
 app.use(express.static(path.join(__dirname, "../")));
 
@@ -34,9 +37,6 @@ mongoose
 	.connect(dbURI)
 	.then(() => console.log("Connected to MongoDB successfully"))
 	.catch((error) => console.error("Failed to connect to MongoDB", error));
-
-// Initialize Express app
-const app = express();
 app.use(cors()); // Allows requests from any origin
 // Middleware to parse JSON bodies in incoming requests
 app.use(express.json());
