@@ -183,13 +183,33 @@ document
 let toBuyList = []; // Initialize as an empty array to store fetched items
 
 // NEW CODE: Fetch the to-buy list from the backend server
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+// const fetchToBuyList = async () => {
+// 	try {
+// 		const response = await fetch("https://to-buy-list.onrender.com/tobuylist", {
+// 			method: "GET",
+// 			headers: {
+// 				"Content-Type": "application/json",
+// 				Authorization: `Bearer ${localStorage.getItem("token")}`, // Uses the token stored in localStorage
+// 			},
+// 		});
+// 		if (!response.ok) throw new Error("Failed to fetch to-buy list");
+
+// 		const items = await response.json();
+// 		return items;
+// 	} catch (error) {
+// 		console.error("Error fetching to-buy list:", error);
+// 		return [];
+// 	}
+// };
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+//yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
 const fetchToBuyList = async () => {
 	try {
 		const response = await fetch("https://to-buy-list.onrender.com/tobuylist", {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${localStorage.getItem("token")}`, // Uses the token stored in localStorage
 			},
 		});
 		if (!response.ok) throw new Error("Failed to fetch to-buy list");
@@ -201,6 +221,8 @@ const fetchToBuyList = async () => {
 		return [];
 	}
 };
+
+//yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
 
 // Array to store expenses (will load expenses for the current month later)
 // This is initialized as an empty array. It will be used to store expenses for the current month.
