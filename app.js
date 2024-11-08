@@ -184,13 +184,36 @@ let toBuyList = []; // Initialize as an empty array to store fetched items
 
 // NEW CODE: Fetch the to-buy list from the backend server
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+const fetchToBuyList = async () => {
+	try {
+		const response = await fetch("https://to-buy-list.onrender.com/tobuylist", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${localStorage.getItem("token")}`, // Uses the token stored in localStorage
+			},
+		});
+		if (!response.ok) {
+			const errorText = await response.text(); // Get the error as text to understand what it contains
+			console.error("Error response:", errorText);
+			throw new Error("Failed to fetch to-buy list");
+		}
+
+		const items = await response.json();
+		return items;
+	} catch (error) {
+		console.error("Error fetching to-buy list:", error);
+		return [];
+	}
+};
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+//yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
 // const fetchToBuyList = async () => {
 // 	try {
 // 		const response = await fetch("https://to-buy-list.onrender.com/tobuylist", {
 // 			method: "GET",
 // 			headers: {
 // 				"Content-Type": "application/json",
-// 				Authorization: `Bearer ${localStorage.getItem("token")}`, // Uses the token stored in localStorage
 // 			},
 // 		});
 // 		if (!response.ok) throw new Error("Failed to fetch to-buy list");
@@ -202,25 +225,6 @@ let toBuyList = []; // Initialize as an empty array to store fetched items
 // 		return [];
 // 	}
 // };
-//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-//yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
-const fetchToBuyList = async () => {
-	try {
-		const response = await fetch("https://to-buy-list.onrender.com/tobuylist", {
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
-		if (!response.ok) throw new Error("Failed to fetch to-buy list");
-
-		const items = await response.json();
-		return items;
-	} catch (error) {
-		console.error("Error fetching to-buy list:", error);
-		return [];
-	}
-};
 
 //yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
 
