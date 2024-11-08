@@ -1,0 +1,6 @@
+# Dependency folder
+/server/node_modules/
+
+/.vscode/
+
+.env
