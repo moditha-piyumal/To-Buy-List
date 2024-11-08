@@ -21,6 +21,7 @@ document
 
 			const data = await response.json();
 			localStorage.setItem("token", data.token); // Store the JWT token
+			console.log("Token stored!");
 
 			// Toggle visibility to show app content and hide login
 			document.getElementById("login-section").style.display = "none";
