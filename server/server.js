@@ -135,17 +135,28 @@ app.post("/login", async (req, res) => {
 
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 // Route to get the user's to-buy list
-app.get("/tobuylist", authenticateToken, async (req, res) => {
+// app.get("/tobuylist", authenticateToken, async (req, res) => {
+// 	try {
+// 		const userItems = await ToBuyItem.find({ userId: req.user.userId });
+// 		res.status(200).json(userItems);
+// 	} catch (error) {
+// 		console.log(error); // Log error for debugging
+// 		res.status(500).json({ message: "Failed to fetch to-buy list", error });
+// 	}
+// });
+
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+app.get("/tobuylist", async (req, res) => {
 	try {
-		const userItems = await ToBuyItem.find({ userId: req.user.userId });
+		const zzz = "671fa63a89127432fca0af87";
+		const userItems = await ToBuyItem.find({ userId: zzz });
 		res.status(200).json(userItems);
 	} catch (error) {
 		console.log(error); // Log error for debugging
 		res.status(500).json({ message: "Failed to fetch to-buy list", error });
 	}
 });
-
-//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+//yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
 // Route to add an item to the user's to-buy list
 // Route to add an item to the user's to-buy list in MongoDB
 app.post("/tobuylist", authenticateToken, async (req, res) => {
